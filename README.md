@@ -1,4 +1,6 @@
-# Add redirects to your Laravel app using a database, so you can edynamically manage it without writing code.
+# Laravel Redirects
+
+## Add redirects to your Laravel app using a database, so you can dynamically manage it without writing code.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/vormkracht10/laravel-redirects.svg?style=flat-square)](https://packagist.org/packages/vormkracht10/laravel-redirects)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/vormkracht10/laravel-redirects/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/vormkracht10/laravel-redirects/actions?query=workflow%3Arun-tests+branch%3Amain)

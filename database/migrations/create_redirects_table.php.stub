@@ -6,13 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
     {
-        Schema::create('laravel_redirects_table', function (Blueprint $table) {
-            $table->id();
-
-            // add fields
-
+        Schema::create('redirects', function (Blueprint $table) {
+            $table->ulid()->primary();
+            $table->string('path');
+            $table->string('destination')->nullable();
+            $table->unsignedInteger('code', 3)->default(301)->autoIncrement(false);
+            $table->unsignedBigInteger('hits')->default(0);
             $table->timestamps();
         });
     }

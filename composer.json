@@ -1,6 +1,6 @@
 {
     "name": "vormkracht10/laravel-redirects",
-    "description": "Add redirects to your Laravel app using a database, so you can edynamically manage it without writing code.",
+    "description": "Add redirects to your Laravel app using a database, so you can dynamically manage it without writing code.",
     "keywords": [
         "Vormkracht10",
         "laravel",

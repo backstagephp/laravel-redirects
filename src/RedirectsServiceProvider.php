@@ -10,16 +10,10 @@ class RedirectsServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        /*
-         * This class RedirectsServiceProvider a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
         $package
             ->name('laravel-redirects')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_laravel_redirects_table')
-            ->hasCommand(RedirectsCommand::class);
+            ->hasMigration('create_laravel_redirects_table');
     }
 }
