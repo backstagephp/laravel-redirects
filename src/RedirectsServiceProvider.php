@@ -14,6 +14,6 @@ class RedirectsServiceProvider extends PackageServiceProvider
             ->name('laravel-redirects')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_laravel_redirects_table');
+            ->hasMigration('create_redirects_table');
     }
 }
