@@ -4,7 +4,6 @@ namespace Vormkracht10\Redirects;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Vormkracht10\Redirects\Commands\RedirectsCommand;
 
 class RedirectsServiceProvider extends PackageServiceProvider
 {

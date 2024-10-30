@@ -23,7 +23,7 @@ return [
 
     /*
      * If the case is sensitive, the following routes will be treated as different:
-     * 
+     *
      * /example
      * /Example
      */
@@ -31,7 +31,7 @@ return [
 
     /*
      * If the trailing slash is sensitive, the following routes will be treated as different:
-     * 
+     *
      * /example
      * /example/
      */
