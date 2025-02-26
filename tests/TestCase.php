@@ -2,9 +2,9 @@
 
 namespace Backstage\Redirects\Laravel\Tests;
 
+use Backstage\Redirects\Laravel\RedirectServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Backstage\Redirects\Laravel\RedirectServiceProvider;
 
 class TestCase extends Orchestra
 {
