@@ -1,6 +1,6 @@
 <?php
 
-namespace Vormkracht10\Redirects\Database\Factories;
+namespace Backstage\Redirects\Laravel\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

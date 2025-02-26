@@ -1,10 +1,10 @@
 <?php
 
-namespace Vormkracht10\Redirects\Tests;
+namespace Backstage\Redirects\Laravel\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Vormkracht10\Redirects\RedirectsServiceProvider;
+use Backstage\Redirects\Laravel\RedirectServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -20,7 +20,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            RedirectsServiceProvider::class,
+            RedirectServiceProvider::class,
         ];
     }
 

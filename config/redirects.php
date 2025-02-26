@@ -19,7 +19,7 @@ return [
     /*
      * Define the model you want to use for Redirects.
      */
-    'model' => \Vormkracht10\Redirects\Models\Redirect::class,
+    'model' => Backstage\Redirects\Laravel\Models\Redirect::class,
 
     /*
      * The default status code to select when redirecting.
