@@ -2,10 +2,10 @@
 
 ## Add redirects to your Laravel app using a database, so you can dynamically manage it without writing code.
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/vormkracht10/laravel-redirects.svg?style=flat-square)](https://packagist.org/packages/vormkracht10/laravel-redirects)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/vormkracht10/laravel-redirects/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/vormkracht10/laravel-redirects/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/vormkracht10/laravel-redirects/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/vormkracht10/laravel-redirects/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/vormkracht10/laravel-redirects.svg?style=flat-square)](https://packagist.org/packages/vormkracht10/laravel-redirects)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/backstage/laravel-redirects.svg?style=flat-square)](https://packagist.org/packages/backstage/laravel-redirects)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/backstagephp/laravel-redirects/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/backstagephp/laravel-redirects/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/backstagephp/laravel-redirects/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/backstagephp/laravel-redirects/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/backstage/laravel-redirects.svg?style=flat-square)](https://packagist.org/packages/backstage/laravel-redirects)
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
@@ -14,7 +14,7 @@ This is where your description should go. Limit it to a paragraph or two. Consid
 You can install the package via composer:
 
 ```bash
-composer require vormkracht10/laravel-redirects
+composer require backstage/laravel-redirects
 ```
 
 You can publish and run the migrations with:
@@ -46,8 +46,7 @@ php artisan vendor:publish --tag="laravel-redirects-views"
 ## Usage
 
 ```php
-$redirects = new Vormkracht10\Redirects();
-echo $redirects->echoPhrase('Hello, Vormkracht10!');
+...
 ```
 
 ## Testing

@@ -1,18 +1,17 @@
 <?php
 
-namespace Vormkracht10\Redirects;
+namespace Backstage\Redirects\Laravel;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class RedirectsServiceProvider extends PackageServiceProvider
+class RedirectServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
         $package
             ->name('laravel-redirects')
             ->hasConfigFile()
-            ->hasViews()
             ->hasMigration('create_redirects_table');
     }
 }

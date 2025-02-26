@@ -1,30 +1,32 @@
 {
-    "name": "vormkracht10/laravel-redirects",
+    "name": "backstage/laravel-redirects",
     "description": "Add redirects to your Laravel app using a database, so you can dynamically manage it without writing code.",
     "keywords": [
-        "Vormkracht10",
+        "backstage",
+        "vormkracht10",
         "laravel",
-        "laravel-redirects"
+        "php",
+        "redirects"
     ],
-    "homepage": "https://github.com/vormkracht10/laravel-redirects",
+    "homepage": "https://github.com/backstagephp/laravel-redirects",
     "license": "MIT",
     "authors": [
         {
             "name": "Mark van Eijk",
-            "email": "mark@vormkracht10.nl",
+            "email": "mark@backstagephp.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.2",
         "spatie/laravel-package-tools": "^1.16",
-        "illuminate/contracts": "^10.0||^11.0"
+        "illuminate/contracts": "^10.0 || ^11.0 || ^12.0"
     },
     "require-dev": {
         "laravel/pint": "^1.14",
-        "nunomaduro/collision": "^8.1.1||^7.10.0",
+        "nunomaduro/collision": "^8.1.1 || ^7.10.0",
         "larastan/larastan": "^2.9",
-        "orchestra/testbench": "^9.0.0||^8.22.0",
+        "orchestra/testbench": "^9.0.0 || ^8.22.0",
         "pestphp/pest": "^2.34",
         "pestphp/pest-plugin-arch": "^2.7",
         "pestphp/pest-plugin-laravel": "^2.3",
@@ -34,13 +36,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Vormkracht10\\Redirects\\": "src/",
-            "Vormkracht10\\Redirects\\Database\\Factories\\": "database/factories/"
+            "Backstage\\Redirects\\": "src/",
+            "Backstage\\Redirects\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Vormkracht10\\Redirects\\Tests\\": "tests/",
+            "Backstage\\Redirects\\Laravel\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -72,11 +74,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Vormkracht10\\Redirects\\RedirectsServiceProvider"
-            ],
-            "aliases": {
-                "Redirects": "Vormkracht10\\Redirects\\Facades\\Redirects"
-            }
+                "Backstage\\Redirects\\Laravel\\RedirectsServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",

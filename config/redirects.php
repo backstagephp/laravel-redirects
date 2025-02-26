@@ -17,6 +17,11 @@ return [
     ],
 
     /*
+     * Define the model you want to use for Redirects.
+     */
+    'model' => \Vormkracht10\Redirects\Models\Redirect::class,
+
+    /*
      * The default status code to select when redirecting.
      */
     'default_status_code' => env('REDIRECT_DEFAULT_STATUS_CODE', 301),
