@@ -36,8 +36,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Backstage\\Redirects\\": "src/",
-            "Backstage\\Redirects\\Database\\Factories\\": "database/factories/"
+            "Backstage\\Redirects\\Laravel\\": "src/",
+            "Backstage\\Redirects\\Laravel\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
