@@ -28,8 +28,7 @@ class HttpRedirects
                     );
             });
 
-
-        if (!$checker) {
+        if (! $checker) {
             return $next($request);
         }
 

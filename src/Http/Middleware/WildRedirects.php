@@ -21,7 +21,7 @@ class WildRedirects
                 return str($request->fullUrl())->contains($redirect->source);
             });
 
-            if (!$checker) {
+        if (! $checker) {
             return $next($request);
         }
 

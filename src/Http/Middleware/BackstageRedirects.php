@@ -2,6 +2,7 @@
 
 namespace Backstage\Redirects\Laravel\Http\Middleware;
 
+use Backstage\Redirects\Laravel\Http\Middleware\Concerns\SkipMethod;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -26,7 +27,7 @@ class BackstageRedirects
         $response = Pipeline::through(config('redirects.middlware', [
             new StrictRedirects,
             new HttpRedirects,
-            new WildRedirects
+            new WildRedirects,
         ]))
             ->send($request)
             ->thenReturn();
