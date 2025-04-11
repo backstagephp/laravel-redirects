@@ -30,7 +30,7 @@ class Redirect extends Model
         if ($request->query()) {
             $destination .= (str($destination)->contains('?') ? '&' : '?').Arr::query($request->query());
         }
-        
+
         return redirect($destination, $this->code)
             ->with('input', $request->input());
     }

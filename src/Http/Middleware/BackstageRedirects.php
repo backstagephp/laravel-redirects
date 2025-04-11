@@ -4,12 +4,9 @@ namespace Backstage\Redirects\Laravel\Http\Middleware;
 
 use Backstage\Redirects\Laravel\Http\Middleware\Concerns\SkipMethod;
 use Closure;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Pipeline;
-use Backstage\Redirects\Laravel\Http\Middleware\HttpRedirects;
-use Backstage\Redirects\Laravel\Http\Middleware\WildRedirects;
-use Backstage\Redirects\Laravel\Http\Middleware\StrictRedirects;
 
 class BackstageRedirects
 {
