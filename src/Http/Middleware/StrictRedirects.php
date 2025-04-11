@@ -28,8 +28,7 @@ class StrictRedirects
                     );
             });
 
-
-        if (!$checker) {
+        if (! $checker) {
             return $next($request);
         }
 

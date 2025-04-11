@@ -2,11 +2,10 @@
 
 namespace Backstage\Redirects\Laravel;
 
+use Backstage\Redirects\Laravel\Http\Middleware;
 use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Route;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Backstage\Redirects\Laravel\Http\Middleware;
 
 class RedirectServiceProvider extends PackageServiceProvider
 {

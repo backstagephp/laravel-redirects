@@ -47,7 +47,7 @@ return [
     */
     'trailing_slash' => env('REDIRECT_WITH_TRAILING_SLASH', false),
 
-    /** 
+    /**
      * The middleware to use for redirecting.
      * If you ad \Backstage\Redirects\Laravel\Http\Middleware\BackstageRedirects, the request will be looped endlessly.
      */
@@ -55,5 +55,5 @@ return [
         Backstage\Redirects\Laravel\Http\Middleware\HttpRedirects::class,
         Backstage\Redirects\Laravel\Http\Middleware\WildRedirects::class,
         Backstage\Redirects\Laravel\Http\Middleware\StrictRedirects::class,
-    ]
+    ],
 ];
