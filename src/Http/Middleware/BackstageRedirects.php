@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Pipeline;
 use Backstage\Redirects\Laravel\Http\Middleware\HttpRedirects;
 use Backstage\Redirects\Laravel\Http\Middleware\WildRedirects;
 use Backstage\Redirects\Laravel\Http\Middleware\StrictRedirects;
-use Backstage\Redirects\Laravel\Http\Middleware\Concerns\SkipMethod;
 
 class BackstageRedirects
 {
