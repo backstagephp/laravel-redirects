@@ -2,13 +2,14 @@
 
 namespace Backstage\Redirects\Laravel\Http\Middleware;
 
-use Backstage\Redirects\Laravel\Http\Middleware\Concerns\SkipMethod;
-use Backstage\Redirects\Laravel\Http\Middleware\HttpRedirects;
-use Backstage\Redirects\Laravel\Http\Middleware\StrictRedirects;
-use Backstage\Redirects\Laravel\Http\Middleware\WildRedirects;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Pipeline;
+use Backstage\Redirects\Laravel\Http\Middleware\HttpRedirects;
+use Backstage\Redirects\Laravel\Http\Middleware\WildRedirects;
+use Backstage\Redirects\Laravel\Http\Middleware\StrictRedirects;
+use Backstage\Redirects\Laravel\Http\Middleware\Concerns\SkipMethod;
 
 class BackstageRedirects
 {
@@ -22,14 +23,18 @@ class BackstageRedirects
         /**
          * @var \Illuminate\Http\Request $request
          */
-        $request = Pipeline::through(config('redirects.middlware', [
+        $response = Pipeline::through(config('redirects.middlware', [
             new StrictRedirects,
             new HttpRedirects,
             new WildRedirects
         ]))
             ->send($request)
             ->thenReturn();
-            
+
+        if ($response instanceof RedirectResponse) {
+            return $response;
+        }
+
         return $next($request);
     }
 }
