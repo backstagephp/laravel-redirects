@@ -22,6 +22,8 @@ class RedirectServiceProvider extends PackageServiceProvider
         /** @var \Illuminate\Routing\Router $router */
         $kernel = $this->app->make(Router::class);
 
-        $kernel->pushMiddlewareToGroup('web', Middleware\BackstageRedirects::class);
+        foreach (config('redirects.middleware') as $middleware) {
+            $kernel->pushMiddlewareToGroup('web', $middleware);
+        }
     }
 }
