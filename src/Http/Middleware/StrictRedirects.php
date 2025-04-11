@@ -18,7 +18,7 @@ class StrictRedirects
          */
         $checker = Redirect::all()
             ->firstWhere(function (Redirect $redirect) use ($request) {
-                return str($request->fullUrl())
+                return str($request->fullUrlWithoutQuery())
                     ->replace(['http://', 'https://'], '')
                     ->replace(['www.'], '')
                     ->exactly(
