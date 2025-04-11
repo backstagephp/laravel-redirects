@@ -2,7 +2,6 @@
 
 namespace Backstage\Redirects\Laravel;
 
-use Backstage\Redirects\Laravel\Http\Middleware;
 use Illuminate\Routing\Router;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
