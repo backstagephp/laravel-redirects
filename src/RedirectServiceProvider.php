@@ -2,6 +2,8 @@
 
 namespace Backstage\Redirects\Laravel;
 
+use Backstage\Redirects\Laravel\Events\UrlHasChanged;
+use Backstage\Redirects\Laravel\Listeners\RedirectOldUrlToNewUrl;
 use Illuminate\Routing\Router;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -24,5 +26,10 @@ class RedirectServiceProvider extends PackageServiceProvider
         foreach (config('redirects.middleware') as $middleware) {
             $kernel->pushMiddlewareToGroup('web', $middleware);
         }
+
+        $this->app['events']->listen(
+            UrlHasChanged::class,
+            RedirectOldUrlToNewUrl::class
+        );
     }
 }
