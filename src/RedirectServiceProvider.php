@@ -3,7 +3,7 @@
 namespace Backstage\Redirects\Laravel;
 
 use Backstage\Redirects\Laravel\Events\UrlHasChanged;
-use Backstage\Redirects\Laravel\Listeners\UrlHasChangedListener;
+use Backstage\Redirects\Laravel\Listeners\RedirectOldUrlToNewUrl;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Illuminate\Routing\Router;
 use Spatie\LaravelPackageTools\Package;
@@ -30,7 +30,7 @@ class RedirectServiceProvider extends PackageServiceProvider
 
         $this->app['events']->listen(
             UrlHasChanged::class,
-            UrlHasChangedListener::class
+            RedirectOldUrlToNewUrl::class
         );
     }
 }

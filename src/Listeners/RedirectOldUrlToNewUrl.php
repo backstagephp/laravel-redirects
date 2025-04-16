@@ -5,7 +5,7 @@ namespace Backstage\Redirects\Laravel\Listeners;
 use Backstage\Redirects\Laravel\Events\UrlHasChanged;
 use Backstage\Redirects\Laravel\Models\Redirect;
 
-class UrlHasChangedListener
+class RedirectOldUrlToNewUrl
 {
     public function handle(UrlHasChanged $event): void
     {
