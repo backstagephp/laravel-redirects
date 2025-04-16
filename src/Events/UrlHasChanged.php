@@ -13,6 +13,5 @@ class UrlHasChanged
         public readonly string $oldUrl,
         public readonly string $newUrl,
         public readonly int $code = 301
-    ) {
-    }
+    ) {}
 }

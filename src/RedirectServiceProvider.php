@@ -4,7 +4,6 @@ namespace Backstage\Redirects\Laravel;
 
 use Backstage\Redirects\Laravel\Events\UrlHasChanged;
 use Backstage\Redirects\Laravel\Listeners\UrlHasChangedListener;
-use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Illuminate\Routing\Router;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
