@@ -1,21 +1,26 @@
 <?php
 
-namespace Backstage\Database\Factories;
+namespace Backstage\Redirects\Laravel\Database\Factories;
 
-use Backstage\Models\Redirect;
+use Backstage\Redirects\Laravel\Models\Redirect;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RedirectFactory extends Factory
 {
     protected $model = Redirect::class;
 
-    public function definition()
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
     {
         return [
-            'source' => $this->faker->url(),
-            'destination' => $this->faker->url(),
-            'code' => $this->faker->numberBetween(301, 302),
-            'hits' => $this->faker->numberBetween(0, 1000),
+            'source' => '/' . $this->faker->unique()->slug(),
+            'destination' => '/' . $this->faker->slug(),
+            'code' => 301,
+            'hits' => 0
         ];
     }
 }
