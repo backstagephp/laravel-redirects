@@ -20,7 +20,6 @@ class RedirectFactory extends Factory
             'source' => '/' . $this->faker->unique()->slug(),
             'destination' => '/' . $this->faker->slug(),
             'code' => 301,
-            'hits' => 0,
         ];
     }
 }
