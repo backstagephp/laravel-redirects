@@ -38,14 +38,14 @@ class WildRedirects
                         ->whereRaw("? NOT LIKE CONCAT(TRIM(TRAILING '/' FROM destination), '%')", [$currentPath]);
                 })
                 // Match full URLs against full URL (prefix match)
-                ->orWhere(function ($q) use ($currentUrl) {
-                    $q->whereRaw("source NOT LIKE '/%'")
-                        ->where(function ($q2) use ($currentUrl) {
-                            $q2->whereRaw("? = TRIM(TRAILING '/' FROM REPLACE(REPLACE(source, 'https://', ''), 'http://', ''))", [$currentUrl])
-                                ->orWhereRaw("? LIKE CONCAT(TRIM(TRAILING '/' FROM REPLACE(REPLACE(source, 'https://', ''), 'http://', '')), '/%')", [$currentUrl]);
-                        })
-                        ->whereRaw("? NOT LIKE CONCAT(TRIM(TRAILING '/' FROM REPLACE(REPLACE(destination, 'https://', ''), 'http://', '')), '%')", [$currentUrl]);
-                });
+                    ->orWhere(function ($q) use ($currentUrl) {
+                        $q->whereRaw("source NOT LIKE '/%'")
+                            ->where(function ($q2) use ($currentUrl) {
+                                $q2->whereRaw("? = TRIM(TRAILING '/' FROM REPLACE(REPLACE(source, 'https://', ''), 'http://', ''))", [$currentUrl])
+                                    ->orWhereRaw("? LIKE CONCAT(TRIM(TRAILING '/' FROM REPLACE(REPLACE(source, 'https://', ''), 'http://', '')), '/%')", [$currentUrl]);
+                            })
+                            ->whereRaw("? NOT LIKE CONCAT(TRIM(TRAILING '/' FROM REPLACE(REPLACE(destination, 'https://', ''), 'http://', '')), '%')", [$currentUrl]);
+                    });
             })
             ->first();
 

@@ -30,10 +30,10 @@ class StrictRedirects
                     $q->whereRaw("source LIKE '/%'")
                         ->whereRaw("TRIM(TRAILING '/' FROM source) = ?", [$currentPath]);
                 })
-                ->orWhere(function ($q) use ($currentUrl) {
-                    $q->whereRaw("source NOT LIKE '/%'")
-                        ->whereRaw("TRIM(TRAILING '/' FROM REPLACE(REPLACE(source, 'https://', ''), 'http://', '')) = ?", [$currentUrl]);
-                });
+                    ->orWhere(function ($q) use ($currentUrl) {
+                        $q->whereRaw("source NOT LIKE '/%'")
+                            ->whereRaw("TRIM(TRAILING '/' FROM REPLACE(REPLACE(source, 'https://', ''), 'http://', '')) = ?", [$currentUrl]);
+                    });
             })
             ->first();
 
