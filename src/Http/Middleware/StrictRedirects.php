@@ -13,25 +13,20 @@ class StrictRedirects
 
     public function handleNonPost(Request $request, Closure $next)
     {
-        /**
-         * @var \Backstage\Redirects\Laravel\Models\Redirect|null $checker
-         */
-        $checker = Redirect::all()
-            ->firstWhere(function (Redirect $redirect) use ($request) {
-                return str($request->url())
-                    ->replace(['http://', 'https://'], '')
-                    ->replace(['www.'], '')
-                    ->exactly(
-                        str($redirect->source)
-                            ->replace(['http://', 'https://'], '')
-                            ->replace(['www.'], '')
-                    );
-            });
+        $currentUrl = str($request->url())
+            ->replace(['http://', 'https://'], '')
+            ->replace(['www.'], '')
+            ->rtrim('/')
+            ->toString();
 
-        if (! $checker) {
+        $redirect = Redirect::query()
+            ->whereRaw("TRIM(TRAILING '/' FROM REPLACE(REPLACE(source, 'https://', ''), 'http://', '')) = ?", [$currentUrl])
+            ->first();
+
+        if (! $redirect) {
             return $next($request);
         }
 
-        return $checker->redirect($request);
+        return $redirect->redirect($request);
     }
 }

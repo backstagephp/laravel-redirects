@@ -4,6 +4,8 @@ namespace Backstage\Redirects\Laravel;
 
 use Backstage\Redirects\Laravel\Events\UrlHasChanged;
 use Backstage\Redirects\Laravel\Listeners\RedirectOldUrlToNewUrl;
+use Backstage\Redirects\Laravel\Models\Redirect;
+use Backstage\Redirects\Laravel\Observers\RedirectObserver;
 use Illuminate\Routing\Router;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -31,5 +33,8 @@ class RedirectServiceProvider extends PackageServiceProvider
             UrlHasChanged::class,
             RedirectOldUrlToNewUrl::class
         );
+
+        $modelClass = config('redirects.model', Redirect::class);
+        $modelClass::observe(RedirectObserver::class);
     }
 }

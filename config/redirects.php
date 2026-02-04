@@ -52,8 +52,8 @@ return [
      * If you ad \Backstage\Redirects\Laravel\Http\Middleware\BackstageRedirects, the request will be looped endlessly.
      */
     'middleware' => [
-        Backstage\Redirects\Laravel\Http\Middleware\HttpRedirects::class,
-        Backstage\Redirects\Laravel\Http\Middleware\WildRedirects::class,
+        // Backstage\Redirects\Laravel\Http\Middleware\HttpRedirects::class,
+        // Backstage\Redirects\Laravel\Http\Middleware\WildRedirects::class,
         Backstage\Redirects\Laravel\Http\Middleware\StrictRedirects::class,
     ],
 ];
