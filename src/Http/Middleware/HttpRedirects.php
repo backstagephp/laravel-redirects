@@ -19,8 +19,22 @@ class HttpRedirects
             ->rtrim('/')
             ->toString();
 
+        $currentPath = str($request->getRequestUri())
+            ->rtrim('/')
+            ->toString();
+
+        // Match relative paths against path only, full URLs against full URL
         $redirect = Redirect::query()
-            ->whereRaw("TRIM(TRAILING '/' FROM REPLACE(REPLACE(source, 'https://', ''), 'http://', '')) = ?", [$currentUrl])
+            ->where(function ($query) use ($currentUrl, $currentPath) {
+                $query->where(function ($q) use ($currentPath) {
+                    $q->whereRaw("source LIKE '/%'")
+                        ->whereRaw("TRIM(TRAILING '/' FROM source) = ?", [$currentPath]);
+                })
+                ->orWhere(function ($q) use ($currentUrl) {
+                    $q->whereRaw("source NOT LIKE '/%'")
+                        ->whereRaw("TRIM(TRAILING '/' FROM REPLACE(REPLACE(source, 'https://', ''), 'http://', '')) = ?", [$currentUrl]);
+                });
+            })
             ->first();
 
         if (! $redirect) {
