@@ -13,25 +13,34 @@ class HttpRedirects
 
     public function handleNonPost(Request $request, Closure $next)
     {
-        /**
-         * @var \Backstage\Redirects\Laravel\Models\Redirect|null $checker
-         */
-        $checker = Redirect::all()
-            ->firstWhere(function (Redirect $redirect) use ($request) {
-                return str($request->fullUrl())
-                    ->replace(['http://', 'https://'], '')
-                    ->replace(['www.'], '')
-                    ->contains(
-                        str($redirect->source)
-                            ->replace(['http://', 'https://'], '')
-                            ->replace(['www.'], '')
-                    );
-            });
+        $currentUrl = str($request->fullUrl())
+            ->replace(['http://', 'https://'], '')
+            ->replace(['www.'], '')
+            ->rtrim('/')
+            ->toString();
 
-        if (! $checker) {
+        $currentPath = str($request->getRequestUri())
+            ->rtrim('/')
+            ->toString();
+
+        // Match relative paths against path only, full URLs against full URL
+        $redirect = Redirect::query()
+            ->where(function ($query) use ($currentUrl, $currentPath) {
+                $query->where(function ($q) use ($currentPath) {
+                    $q->whereRaw("source LIKE '/%'")
+                        ->whereRaw("TRIM(TRAILING '/' FROM source) = ?", [$currentPath]);
+                })
+                    ->orWhere(function ($q) use ($currentUrl) {
+                        $q->whereRaw("source NOT LIKE '/%'")
+                            ->whereRaw("TRIM(TRAILING '/' FROM REPLACE(REPLACE(source, 'https://', ''), 'http://', '')) = ?", [$currentUrl]);
+                    });
+            })
+            ->first();
+
+        if (! $redirect) {
             return $next($request);
         }
 
-        return $checker->redirect($request);
+        return $redirect->redirect($request);
     }
 }
