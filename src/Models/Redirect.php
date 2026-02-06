@@ -40,7 +40,7 @@ class Redirect extends Model
         }
 
         return RedirectFacade::to($destination, $this->code, [
-            'Cache-Control' => 'no-store, no-cache, must-revalidate',
+            'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
         ])->withInput($request->input());
     }
 }
