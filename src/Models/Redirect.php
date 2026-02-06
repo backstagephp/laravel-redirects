@@ -36,11 +36,11 @@ class Redirect extends Model
         $destination = $this->destination;
 
         if ($request->query()) {
-            $destination .= (str($destination)->contains('?') ? '&' : '?').Arr::query($request->query());
+            $destination .= (str($destination)->contains('?') ? '&' : '?') . Arr::query($request->query());
         }
 
         return RedirectFacade::to($destination, $this->code, [
-            'Cache-Control' => 'no-store, no-cache, must-revalidate',
+            'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
         ])->withInput($request->input());
     }
 }
