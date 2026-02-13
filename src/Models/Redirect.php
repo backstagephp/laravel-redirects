@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Redirect as RedirectFacade;
 
 class Redirect extends Model
 {
@@ -38,7 +39,8 @@ class Redirect extends Model
             $destination .= (str($destination)->contains('?') ? '&' : '?') . Arr::query($request->query());
         }
 
-        return redirect($destination, $this->code)
-            ->with('input', $request->input());
+        return RedirectFacade::to($destination, $this->code, [
+            'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+        ])->withInput($request->input());
     }
 }
