@@ -13,6 +13,7 @@ class UrlHasChanged
     public function __construct(
         public readonly string $oldUrl,
         public readonly string $newUrl,
-        public readonly int $code = 301
+        public readonly int $code = 301,
+        public readonly ?string $siteId = null,
     ) {}
 }

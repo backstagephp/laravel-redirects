@@ -22,6 +22,7 @@ class Redirect extends Model
         'source',
         'destination',
         'code',
+        'site_id',
     ];
 
     protected static function newFactory()

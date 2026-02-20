@@ -26,11 +26,12 @@ class TestCase extends Orchestra
 
     public function getEnvironmentSetUp($app)
     {
-        config()->set('database.default', 'testing');
+        // Use the default Orchestra Testbench database setup
+        // This respects DB_CONNECTION and DB_DATABASE from phpunit.xml
+    }
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-redirects_table.php.stub';
-        $migration->up();
-        */
+    protected function defineDatabaseMigrations()
+    {
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 }

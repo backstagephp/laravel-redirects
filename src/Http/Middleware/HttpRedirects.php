@@ -18,14 +18,21 @@ class HttpRedirects
          */
         $checker = Redirect::all()
             ->firstWhere(function (Redirect $redirect) use ($request) {
-                return str($request->fullUrl())
+                $requestUrl = str($request->fullUrl())
                     ->replace(['http://', 'https://'], '')
-                    ->replace(['www.'], '')
-                    ->contains(
-                        str($redirect->source)
-                            ->replace(['http://', 'https://'], '')
-                            ->replace(['www.'], '')
-                    );
+                    ->replace(['www.'], '');
+
+                $requestPath = $request->path();
+                $requestPathWithSlash = '/' . ltrim($requestPath, '/');
+
+                $redirectSource = str($redirect->source)
+                    ->replace(['http://', 'https://'], '')
+                    ->replace(['www.'], '');
+
+                // Match full URL or just the path (using contains for flexible matching)
+                return $requestUrl->contains($redirectSource)
+                    || str($requestPath)->contains($redirect->source)
+                    || str($requestPathWithSlash)->contains($redirect->source);
             });
 
         if (! $checker) {
