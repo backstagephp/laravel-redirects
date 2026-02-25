@@ -4,7 +4,6 @@ namespace Backstage\Redirects\Laravel\Listeners;
 
 use Backstage\Redirects\Laravel\Events\UrlHasChanged;
 use Backstage\Redirects\Laravel\Models\Redirect;
-use Illuminate\Support\Facades\Log;
 
 class RedirectOldUrlToNewUrl
 {

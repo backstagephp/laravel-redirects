@@ -56,6 +56,7 @@ class StrictRedirects
 
         if (! $checker) {
             Log::info('StrictRedirects: No redirect found, continuing');
+
             return $next($request);
         }
 
