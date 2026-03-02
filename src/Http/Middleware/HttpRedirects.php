@@ -13,10 +13,15 @@ class HttpRedirects
 
     public function handleNonPost(Request $request, Closure $next)
     {
+        // Get current site
+        $currentSite = $request->site();
+
         /**
          * @var \Backstage\Redirects\Laravel\Models\Redirect|null $checker
          */
-        $checker = Redirect::all()
+        $checker = Redirect::query()
+            ->when($currentSite, fn ($query) => $query->where('site_id', $currentSite->ulid))
+            ->get()
             ->firstWhere(function (Redirect $redirect) use ($request) {
                 $requestUrl = str($request->fullUrl())
                     ->replace(['http://', 'https://'], '')
