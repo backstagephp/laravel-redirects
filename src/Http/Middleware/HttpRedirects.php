@@ -28,7 +28,7 @@ class HttpRedirects
                     ->replace(['www.'], '');
 
                 $requestPath = $request->path();
-                $requestPathWithSlash = '/' . ltrim($requestPath, '/');
+                $requestPathWithSlash = '/'.ltrim($requestPath, '/');
 
                 $redirectSource = str($redirect->source)
                     ->replace(['http://', 'https://'], '')
