@@ -23,15 +23,20 @@ class StrictRedirects
 
         $modelClass = config('redirects.model', Redirect::class);
 
+        // Get current site
+        $currentSite = $request->site();
+
         Log::info('StrictRedirects: Checking for redirect', [
             'path' => $requestPath,
             'url' => (string) $requestUrl,
+            'site_id' => $currentSite?->ulid,
         ]);
 
         /**
          * @var \Backstage\Redirects\Laravel\Models\Redirect|null $checker
          */
         $checker = $modelClass::query()
+            ->when($currentSite, fn ($query) => $query->where('site_id', $currentSite->ulid))
             ->get()
             ->first(function (Redirect $redirect) use ($requestUrl, $requestPath, $requestPathWithSlash) {
                 $redirectSource = str($redirect->source)
