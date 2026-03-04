@@ -6,7 +6,6 @@ use Backstage\Redirects\Laravel\Http\Middleware\Concerns\SkipMethod;
 use Backstage\Redirects\Laravel\Models\Redirect;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class StrictRedirects
 {
@@ -26,17 +25,13 @@ class StrictRedirects
         // Get current site
         $currentSite = $request->site();
 
-        Log::info('StrictRedirects: Checking for redirect', [
-            'path' => $requestPath,
-            'url' => (string) $requestUrl,
-            'site_id' => $currentSite?->ulid,
-        ]);
-
         /**
          * @var \Backstage\Redirects\Laravel\Models\Redirect|null $checker
          */
         $checker = $modelClass::query()
-            ->when($currentSite, fn ($query) => $query->where('site_id', $currentSite->ulid))
+            ->when($currentSite, fn ($query) => $query->where(function ($q) use ($currentSite) {
+                $q->where('site_id', $currentSite->ulid)->orWhereNull('site_id');
+            }))
             ->get()
             ->first(function (Redirect $redirect) use ($requestUrl, $requestPath, $requestPathWithSlash) {
                 $redirectSource = str($redirect->source)
@@ -44,31 +39,14 @@ class StrictRedirects
                     ->replace(['www.'], '');
 
                 // Match full URL or just the path
-                $matches = $requestUrl->exactly($redirectSource)
+                return $requestUrl->exactly($redirectSource)
                     || $requestPath === $redirect->source
                     || $requestPathWithSlash === $redirect->source;
-
-                if ($matches) {
-                    Log::info('StrictRedirects: Match found', [
-                        'redirect_id' => $redirect->ulid,
-                        'source' => $redirect->source,
-                        'destination' => $redirect->destination,
-                    ]);
-                }
-
-                return $matches;
             });
 
         if (! $checker) {
-            Log::info('StrictRedirects: No redirect found, continuing');
-
             return $next($request);
         }
-
-        Log::info('StrictRedirects: Redirecting', [
-            'from' => $request->url(),
-            'to' => $checker->destination,
-        ]);
 
         return $checker->redirect($request);
     }

@@ -20,7 +20,9 @@ class HttpRedirects
          * @var \Backstage\Redirects\Laravel\Models\Redirect|null $checker
          */
         $checker = Redirect::query()
-            ->when($currentSite, fn ($query) => $query->where('site_id', $currentSite->ulid))
+            ->when($currentSite, fn ($query) => $query->where(function ($q) use ($currentSite) {
+                $q->where('site_id', $currentSite->ulid)->orWhereNull('site_id');
+            }))
             ->get()
             ->firstWhere(function (Redirect $redirect) use ($request) {
                 $requestUrl = str($request->fullUrl())
