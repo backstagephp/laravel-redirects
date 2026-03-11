@@ -26,7 +26,7 @@ class StrictRedirects
         $currentSite = $request->site();
 
         /**
-         * @var \Backstage\Redirects\Laravel\Models\Redirect|null $checker
+         * @var Redirect|null $checker
          */
         $checker = $modelClass::query()
             ->when($currentSite, fn ($query) => $query->where(function ($q) use ($currentSite) {
