@@ -13,10 +13,17 @@ class WildRedirects
 
     public function handleNonPost(Request $request, Closure $next)
     {
+        // Get current site
+        $currentSite = $request->site();
+
         /**
-         * @var \Backstage\Redirects\Laravel\Models\Redirect|null $checker
+         * @var Redirect|null $checker
          */
-        $checker = Redirect::all()
+        $checker = Redirect::query()
+            ->when($currentSite, fn ($query) => $query->where(function ($q) use ($currentSite) {
+                $q->where('site_id', $currentSite->ulid)->orWhereNull('site_id');
+            }))
+            ->get()
             ->firstWhere(function (Redirect $redirect) use ($request) {
                 return str($request->fullUrl())->contains($redirect->source);
             });

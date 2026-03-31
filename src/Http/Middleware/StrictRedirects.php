@@ -13,19 +13,35 @@ class StrictRedirects
 
     public function handleNonPost(Request $request, Closure $next)
     {
+        $requestUrl = str($request->url())
+            ->replace(['http://', 'https://'], '')
+            ->replace(['www.'], '');
+
+        $requestPath = $request->path();
+        $requestPathWithSlash = '/'.ltrim($requestPath, '/');
+
+        $modelClass = config('redirects.model', Redirect::class);
+
+        // Get current site
+        $currentSite = $request->site();
+
         /**
-         * @var \Backstage\Redirects\Laravel\Models\Redirect|null $checker
+         * @var Redirect|null $checker
          */
-        $checker = Redirect::all()
-            ->firstWhere(function (Redirect $redirect) use ($request) {
-                return str($request->url())
+        $checker = $modelClass::query()
+            ->when($currentSite, fn ($query) => $query->where(function ($q) use ($currentSite) {
+                $q->where('site_id', $currentSite->ulid)->orWhereNull('site_id');
+            }))
+            ->get()
+            ->first(function (Redirect $redirect) use ($requestUrl, $requestPath, $requestPathWithSlash) {
+                $redirectSource = str($redirect->source)
                     ->replace(['http://', 'https://'], '')
-                    ->replace(['www.'], '')
-                    ->exactly(
-                        str($redirect->source)
-                            ->replace(['http://', 'https://'], '')
-                            ->replace(['www.'], '')
-                    );
+                    ->replace(['www.'], '');
+
+                // Match full URL or just the path
+                return $requestUrl->exactly($redirectSource)
+                    || $requestPath === $redirect->source
+                    || $requestPathWithSlash === $redirect->source;
             });
 
         if (! $checker) {

@@ -1,5 +1,8 @@
 <?php
 
+use Backstage\Redirects\Laravel\Http\Middleware\StrictRedirects;
+use Backstage\Redirects\Laravel\Models\Redirect;
+
 return [
     /*
      * The available status codes for redirection.
@@ -19,7 +22,7 @@ return [
     /*
      * Define the model you want to use for Redirects.
      */
-    'model' => Backstage\Redirects\Laravel\Models\Redirect::class,
+    'model' => Redirect::class,
 
     /*
      * The default status code to select when redirecting.
@@ -52,8 +55,8 @@ return [
      * If you ad \Backstage\Redirects\Laravel\Http\Middleware\BackstageRedirects, the request will be looped endlessly.
      */
     'middleware' => [
-        Backstage\Redirects\Laravel\Http\Middleware\HttpRedirects::class,
-        Backstage\Redirects\Laravel\Http\Middleware\WildRedirects::class,
-        Backstage\Redirects\Laravel\Http\Middleware\StrictRedirects::class,
+        // Backstage\Redirects\Laravel\Http\Middleware\HttpRedirects::class,
+        // Backstage\Redirects\Laravel\Http\Middleware\WildRedirects::class,
+        StrictRedirects::class,
     ],
 ];
