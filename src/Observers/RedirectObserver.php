@@ -98,7 +98,7 @@ class RedirectObserver
         }
 
         // Ensure leading slash
-        $normalized = '/' . ltrim($normalized, '/');
+        $normalized = '/'.ltrim($normalized, '/');
 
         // Remove trailing slash (unless it's just "/")
         if ($normalized !== '/') {
