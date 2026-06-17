@@ -20,6 +20,11 @@ class RedirectServiceProvider extends PackageServiceProvider
             ->hasMigration('create_redirects_table');
     }
 
+    public function packageRegistered()
+    {
+        $this->app->scoped(Redirects::class);
+    }
+
     public function packageBooted()
     {
         // TODO: Once Laravel 10 support is dropped, consider using the new

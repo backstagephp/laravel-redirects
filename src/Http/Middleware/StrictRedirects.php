@@ -2,6 +2,7 @@
 
 namespace Backstage\Redirects\Laravel\Http\Middleware;
 
+use Backstage\Redirects\Laravel\Facades\Redirects;
 use Backstage\Redirects\Laravel\Http\Middleware\Concerns\SkipMethod;
 use Backstage\Redirects\Laravel\Models\Redirect;
 use Closure;
@@ -20,19 +21,13 @@ class StrictRedirects
         $requestPath = $request->path();
         $requestPathWithSlash = '/' . ltrim($requestPath, '/');
 
-        $modelClass = config('redirects.model', Redirect::class);
-
         // Get current site
         $currentSite = $request->site();
 
         /**
          * @var Redirect|null $checker
          */
-        $checker = $modelClass::query()
-            ->when($currentSite, fn ($query) => $query->where(function ($q) use ($currentSite) {
-                $q->where('site_id', $currentSite->ulid)->orWhereNull('site_id');
-            }))
-            ->get()
+        $checker = Redirects::forSite($currentSite)
             ->first(function (Redirect $redirect) use ($requestUrl, $requestPath, $requestPathWithSlash) {
                 $redirectSource = str($redirect->source)
                     ->replace(['http://', 'https://'], '')

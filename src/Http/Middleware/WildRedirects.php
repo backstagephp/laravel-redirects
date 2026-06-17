@@ -2,6 +2,7 @@
 
 namespace Backstage\Redirects\Laravel\Http\Middleware;
 
+use Backstage\Redirects\Laravel\Facades\Redirects;
 use Backstage\Redirects\Laravel\Http\Middleware\Concerns\SkipMethod;
 use Backstage\Redirects\Laravel\Models\Redirect;
 use Closure;
@@ -19,11 +20,7 @@ class WildRedirects
         /**
          * @var Redirect|null $checker
          */
-        $checker = Redirect::query()
-            ->when($currentSite, fn ($query) => $query->where(function ($q) use ($currentSite) {
-                $q->where('site_id', $currentSite->ulid)->orWhereNull('site_id');
-            }))
-            ->get()
+        $checker = Redirects::forSite($currentSite)
             ->firstWhere(function (Redirect $redirect) use ($request) {
                 return str($request->fullUrl())->contains($redirect->source);
             });
