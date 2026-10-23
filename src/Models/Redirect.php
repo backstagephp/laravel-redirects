@@ -59,7 +59,7 @@ class Redirect extends Model
     protected static function comparable(string $url): array
     {
         $host = parse_url(trim($url), PHP_URL_HOST);
-        $path = '/' . trim(static::pathOf($url), '/');
+        $path = '/'.trim(static::pathOf($url), '/');
 
         return [
             $host ? preg_replace('/^www\./', '', strtolower($host)) : null,
@@ -70,9 +70,9 @@ class Redirect extends Model
     protected static function pathOf(string $url): string
     {
         $parts = parse_url(trim($url)) ?: [];
-        $query = isset($parts['query']) ? '?' . $parts['query'] : '';
+        $query = isset($parts['query']) ? '?'.$parts['query'] : '';
 
-        return '/' . ltrim($parts['path'] ?? '', '/') . $query;
+        return '/'.ltrim($parts['path'] ?? '', '/').$query;
     }
 
     public function redirect(Request $request): ?RedirectResponse
@@ -82,7 +82,7 @@ class Redirect extends Model
         $destination = $this->destination;
 
         if ($request->query()) {
-            $destination .= (str($destination)->contains('?') ? '&' : '?') . Arr::query($request->query());
+            $destination .= (str($destination)->contains('?') ? '&' : '?').Arr::query($request->query());
         }
 
         return RedirectFacade::to($destination, $this->code, [

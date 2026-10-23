@@ -19,7 +19,7 @@ class StrictRedirects
             ->replace(['www.'], '');
 
         $requestPath = $request->path();
-        $requestPathWithSlash = '/' . ltrim($requestPath, '/');
+        $requestPathWithSlash = '/'.ltrim($requestPath, '/');
 
         // Get current site
         $currentSite = $request->site();
